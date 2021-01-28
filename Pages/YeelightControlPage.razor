@@ -1,4 +1,7 @@
 @page "/yeelight"
+@using raspberrypi_homecontrol_api_client.Components
 
 <h1>Yeelight control</h1>
-<button @onclick="YeelightToggle">Toggle</button>
+<button class="btn btn-primary" @onclick="YeelightToggle">Toggle</button>
+
+<YeelightColorMatrix />

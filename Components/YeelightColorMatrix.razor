@@ -1,0 +1,22 @@
+<hr>
+<style>
+    .colorButt {
+        height: 30px;
+        width: 30px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 7px lightgray;
+    }
+</style>
+
+<p><b>Selected color</b>: @selectedColor</p>
+
+<div class="row">
+    @foreach (var item in allButtonsRGB)
+    {
+        <div class="col">
+            <button class="colorButt" style=@SetButtonColor(item) @onclick="() => YeelightColor(item)"></button>
+        </div>
+    }
+</div>
+<hr>
