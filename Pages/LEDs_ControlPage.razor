@@ -1,0 +1,15 @@
+﻿@page "/"
+@using raspberrypi_homecontrol_api_client.Components
+
+@if (Leds is not null)
+{
+    <h1>LED control</h1>
+    <div class="row">
+        @foreach (var led in Leds)
+        {
+            <div class="col-md-6">
+                <LED_Control Led=@led />
+            </div>
+        }
+    </div>
+}

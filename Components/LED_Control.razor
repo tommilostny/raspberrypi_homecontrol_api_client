@@ -1,0 +1,6 @@
+<h2>@Led.Name</h2>
+<ul>
+    <li>GPIO pin: <b>@Led.Pin</b></li>
+    <li>Status: <b>@(Led.IsActive ? "on" : "off")</b></li>
+</ul>
+<button class="btn btn-primary" @onclick="() => LED_Toggle()">Toggle</button>
