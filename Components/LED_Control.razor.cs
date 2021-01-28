@@ -1,11 +1,7 @@
-using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
-using System.Linq;
-using Newtonsoft.Json;
 using raspberrypi_homecontrol_api_client.Models;
 
 namespace raspberrypi_homecontrol_api_client.Components
@@ -18,10 +14,24 @@ namespace raspberrypi_homecontrol_api_client.Components
         [Parameter]
         public LED_Model Led { get; set; }
 
+        private double Interval { get; set; } = 1.0;
+
         private async Task LED_Toggle()
         {
             await httpClient.GetAsync($"led/{Led.Number}/toggle");
             Led.IsActive = !Led.IsActive;
+        }
+
+        private async Task LED_Blink()
+        {
+            await httpClient.GetAsync($"led/{Led.Number}/blink/{string.Format("{0:N2}", Interval)}");
+            Led.IsActive = true;
+        }
+
+        private void IntervalInput_ChangeEvent(ChangeEventArgs e)
+        {
+            var inputValue = Convert.ToDouble(e.Value);
+            Interval = inputValue > 0 ? inputValue : 1.0;
         }
     }
 }
