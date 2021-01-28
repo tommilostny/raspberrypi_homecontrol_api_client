@@ -1,11 +1,20 @@
-<h2><strong>LED</strong> @Led.Number</h2>
-<ul>
-    <li>GPIO pin: <b>@Led.Pin</b></li>
-    <li>Status: <b>@(Led.IsActive ? "on" : "off")</b></li>
-</ul>
+<div style="padding:20px;margin:5px;box-shadow:0 0 15px lightgrey;border-radius:10px">
+    <div class="row">
+        <div class="col">
+            <h2><strong>LED</strong> @Led.Number</h2>
+            <ul>
+                <li>GPIO pin: <b>@Led.Pin</b></li>
+                <li>Status: <b>@LedStatusAsString()</b></li>
+            </ul>
 
-<button class="btn btn-primary" @onclick="() => LED_Toggle()">Toggle</button>
-<button class="btn btn-primary" @onclick="() => LED_Blink()">Blink</button>
+            <button class="btn btn-primary" @onclick="() => LED_Toggle()">Toggle</button>
+            <button class="btn btn-primary" @onclick="() => LED_Blink()">Blink</button>
 
-<br><br>
-<input type="number" @onchange="IntervalInput_ChangeEvent" placeholder="Blink interval (1.0)" class="form-control" />
+            <br><br>
+            <input type="number" @onchange="IntervalInput_ChangeEvent" placeholder="Blink interval (1.0)" class="form-control" />
+        </div>
+        <div class="col-4">
+            <img src=@LedStatusImage() class="img-fluid" />
+        </div>
+    </div>
+</div>

@@ -18,8 +18,10 @@ namespace raspberrypi_homecontrol_api_client.Components
 
         private async Task LED_Toggle()
         {
-            await httpClient.GetAsync($"led/{Led.Number}/toggle");
-            Led.IsActive = !Led.IsActive;
+            if (Led.IsActive = !Led.IsActive)
+                await httpClient.GetAsync($"led/{Led.Number}/on");
+            else
+                await httpClient.GetAsync($"led/{Led.Number}/off");
         }
 
         private async Task LED_Blink()
@@ -33,5 +35,9 @@ namespace raspberrypi_homecontrol_api_client.Components
             var inputValue = Convert.ToDouble(e.Value);
             Interval = inputValue > 0 ? inputValue : 1.0;
         }
+
+        private string LedStatusAsString() => Led.IsActive ? "on" : "off";
+
+        private string LedStatusImage() => $"led{Led.Number}{LedStatusAsString()}.jpg";
     }
 }
