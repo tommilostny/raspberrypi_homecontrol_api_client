@@ -9,10 +9,10 @@
     }
 </style>
 
-<p><b>Selected color</b>: @selectedColor</p>
+<p><b>Selected color</b>: @SelectedColor</p>
 
 <div class="row">
-    @foreach (var item in allButtonsRGB)
+    @foreach (var item in AllButtonsRGB)
     {
         <div class="col">
             <button class="colorButt" style=@SetButtonColor(item) @onclick="() => YeelightColor(item)"></button>

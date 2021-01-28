@@ -10,23 +10,23 @@ namespace raspberrypi_homecontrol_api_client.Components
         [Inject]
         private HttpClient httpClient { get; set; }
 
-        private class ButtonRGB
+        private struct ButtonRGB
         {
             public int Red { get; set; }
             public int Green { get; set; }
             public int Blue { get; set; }
         }
         
-        private List<ButtonRGB> allButtonsRGB = new List<ButtonRGB>();
+        private List<ButtonRGB> AllButtonsRGB { get; set; } = new List<ButtonRGB>();
 
-        private string selectedColor = string.Empty;
+        private string SelectedColor { get; set; } = string.Empty;
 
         private string SetButtonColor(ButtonRGB color) => $"background-color: rgb({color.Red},{color.Green},{color.Blue});"; 
 
         private async Task YeelightColor(ButtonRGB color)
         {
             await httpClient.GetAsync($"yeelight/color/{color.Red}/{color.Green}/{color.Blue}");
-            selectedColor = $"rgb({color.Red}, {color.Green}, {color.Blue})";
+            SelectedColor = $"rgb({color.Red}, {color.Green}, {color.Blue})";
         }
 
         protected override Task OnInitializedAsync()
@@ -39,7 +39,7 @@ namespace raspberrypi_homecontrol_api_client.Components
                     for (int b = 0; b <= 255; b += 51)
                     {
                         if (r != 0 || g != 0 || b != 0)
-                            allButtonsRGB.Add(new ButtonRGB { Red = r, Green = g, Blue = b });
+                            AllButtonsRGB.Add(new ButtonRGB { Red = r, Green = g, Blue = b });
                     }
                 }   
             }
