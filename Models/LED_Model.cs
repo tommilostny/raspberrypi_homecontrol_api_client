@@ -7,7 +7,5 @@ namespace raspberrypi_homecontrol_api_client.Models
         public bool IsActive { get; set; }
 
         public int Number { get; set; }
-        
-        public string Name { get; set; }
     }
 }
