@@ -1,6 +1,12 @@
 @page "/yeelight"
 @using raspberrypi_homecontrol_api_client.Components
 
+<style>
+    input[type=range] {
+        width: 100%;
+    }
+</style>
+
 <h1>Yeelight control</h1>
 @if (Bulb is not null)
 {
@@ -19,9 +25,21 @@
             </div>
         </div>
         <div class="col">
-            <label for="brightness_slider">Temperature: @Bulb.Temperature K</label>
+            <label for="temperature_slider">Temperature: @Bulb.Temperature K</label>
             <div class="input-group mb-3">
                 <input type="range" min="1700" max="6500" value="@Bulb.Temperature" @onchange="YeelightTemperature" id="temperature_slider" />
+            </div>
+        </div>
+        <div class="col">
+            <label for="hue_slider">Hue: @Bulb.Hue°</label>
+            <div class="input-group mb-3">
+                <input type="range" min="0" max="359" value="@Bulb.Hue" @onchange="YeelightHue" id="hue_slider" />
+            </div>
+        </div>
+        <div class="col">
+            <label for="saturation_slider">Saturation: @Bulb.Saturation%</label>
+            <div class="input-group mb-3">
+                <input type="range" min="0" max="100" value="@Bulb.Saturation" @onchange="YeelightSaturation" id="saturation_slider" />
             </div>
         </div>
     </div>

@@ -38,6 +38,18 @@ namespace raspberrypi_homecontrol_api_client.Pages
             await httpClient.GetAsync($"yeelight/temperature/{Bulb.Temperature}");
         }
 
+        private async Task YeelightHue(ChangeEventArgs e)
+        {
+            Bulb.Hue = Convert.ToInt32(e.Value);
+            await httpClient.GetAsync($"yeelight/hs/{Bulb.Hue}/{Bulb.Saturation}");
+        }
+
+        private async Task YeelightSaturation(ChangeEventArgs e)
+        {
+            Bulb.Saturation = Convert.ToInt32(e.Value);
+            await httpClient.GetAsync($"yeelight/hs/{Bulb.Hue}/{Bulb.Saturation}");
+        }
+
         private async Task GetBulbStatus()
         {
             var response = await httpClient.GetAsync($"yeelight");
