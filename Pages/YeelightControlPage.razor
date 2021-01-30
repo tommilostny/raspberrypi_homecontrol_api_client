@@ -2,23 +2,29 @@
 @using raspberrypi_homecontrol_api_client.Components
 
 <h1>Yeelight control</h1>
-<div class="row">
-    <button class="btn btn-primary" @onclick="YeelightToggle">Toggle</button>
-</div>
-<br>
-<div class="row">
-    <div class="col">
-        <label for="brightness_slider">Brightness: @Brightness%</label>
-        <div class="input-group mb-3">
-            <input type="range" min="1" max="100" value="@Brightness" @onchange="YeelightBrightness" id="brightness_slider" />
+@if (Bulb is not null)
+{
+    <div class="row">
+        <div class="col">
+            <p>Power: <b>@Bulb.Power</b></p>
+            <button class="btn btn-primary" @onclick="YeelightToggle">Toggle</button>
         </div>
     </div>
-    <div class="col">
-        <label for="brightness_slider">Temperature: @Temperature K</label>
-        <div class="input-group mb-3">
-            <input type="range" min="1700" max="6500" value="@Temperature" @onchange="YeelightTemperature" id="temperature_slider" />
+    <br>
+    <div class="row">
+        <div class="col">
+            <label for="brightness_slider">Brightness: @Bulb.Brightness%</label>
+            <div class="input-group mb-3">
+                <input type="range" min="1" max="100" value="@Bulb.Brightness" @onchange="YeelightBrightness" id="brightness_slider" />
+            </div>
+        </div>
+        <div class="col">
+            <label for="brightness_slider">Temperature: @Bulb.Temperature K</label>
+            <div class="input-group mb-3">
+                <input type="range" min="1700" max="6500" value="@Bulb.Temperature" @onchange="YeelightTemperature" id="temperature_slider" />
+            </div>
         </div>
     </div>
-</div>
 
-<YeelightColorMatrix />
+    <YeelightColorMatrix />
+}

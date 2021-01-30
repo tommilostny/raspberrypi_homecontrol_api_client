@@ -15,25 +15,37 @@ namespace raspberrypi_homecontrol_api_client.Pages
         [Inject]
         private HttpClient httpClient { get; set; }
 
-        private int Brightness { get; set; } = 100;
-
-        private int Temperature { get; set; } = 4000;
+        private YeelightBulbModel Bulb { get; set; }
 
         private async Task YeelightToggle()
         {
             await httpClient.GetAsync("yeelight/power/toggle");
+            await GetBulbStatus();
         }
 
         private async Task YeelightBrightness(ChangeEventArgs e)
         {
-            Brightness = Convert.ToInt32(e.Value);
-            await httpClient.GetAsync($"yeelight/brightness/{Brightness}");
+            Bulb.Brightness = Convert.ToInt32(e.Value);
+            await httpClient.GetAsync($"yeelight/brightness/{Bulb.Brightness}");
         }
 
         private async Task YeelightTemperature(ChangeEventArgs e)
         {
-            Temperature = Convert.ToInt32(e.Value);
-            await httpClient.GetAsync($"yeelight/temperature/{Temperature}");
+            Bulb.Temperature = Convert.ToInt32(e.Value);
+            await httpClient.GetAsync($"yeelight/temperature/{Bulb.Temperature}");
+        }
+
+        public async Task GetBulbStatus()
+        {
+            var response = await httpClient.GetAsync($"yeelight");
+            var content = await response.Content.ReadAsStringAsync();
+            Bulb = JsonConvert.DeserializeObject<YeelightBulbModel>(content);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await GetBulbStatus();
+            await base.OnInitializedAsync();
         }
     }
 }
