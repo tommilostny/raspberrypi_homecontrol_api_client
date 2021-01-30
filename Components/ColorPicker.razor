@@ -1,0 +1,69 @@
+<hr>
+<style>
+    .colorButt {
+        height: 50px;
+        width: 50px;
+        border: none;
+        border-radius: 500px;
+        box-shadow: 0 0 12px lightgray;
+    }
+    input[type=number] {
+        width: 70%;
+    }
+</style>
+
+<p><b>Current color</b>: rgb(@Color.Red, @Color.Green, @Color.Blue)</p>
+
+@if (Colors is not null)
+{
+    <div class="row">
+        @foreach (var item in Colors)
+        {
+            <div class="col">
+                <p>@item.Name</p>
+                <button class="colorButt" style=@SetButtonColor(item.Color) @onclick="() => YeelightColor(item.Color)"></button>
+            </div>
+        }
+    </div>
+}
+
+<br><p><b>Custom color</b>:</p>
+
+@if (CustomColor is not null)
+{
+    <div class="row">
+        <div class="col-2">
+            <div class="input-group mb-3">
+                <span class="input-group-text">R</span>
+                <input type="number" min="0" max="255" @bind-value="CustomColor.Red" />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-3">
+                <span class="input-group-text">G</span>
+                <input type="number" min="0" max="255" @bind-value="CustomColor.Green" />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-3">
+                <span class="input-group-text">B</span>
+                <input type="number" min="0" max="255" @bind-value="CustomColor.Blue" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-1">
+                    <div class="colorButt" style="@SetButtonColor(CustomColor)"></div>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary" @onclick="() => YeelightColor(CustomColor)" style="margin-top:5px;">
+                        Set color
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<hr>

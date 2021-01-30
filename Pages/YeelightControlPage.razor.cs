@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
-using System.Linq;
 using Newtonsoft.Json;
 using raspberrypi_homecontrol_api_client.Models;
 using raspberrypi_homecontrol_api_client.Components;
@@ -18,7 +15,7 @@ namespace raspberrypi_homecontrol_api_client.Pages
 
         private YeelightBulbModel Bulb { get; set; }
 
-        private YeelightColorMatrix colorMatrix { get; set; }
+        private ColorPicker colorMatrix { get; set; }
 
         private async Task YeelightToggle()
         {
@@ -55,18 +52,15 @@ namespace raspberrypi_homecontrol_api_client.Pages
             var response = await httpClient.GetAsync($"yeelight");
             var content = await response.Content.ReadAsStringAsync();
             Bulb = JsonConvert.DeserializeObject<YeelightBulbModel>(content);
-            DecodeColor();
+            Bulb.Color = DecodeColor(Bulb.RGB);
         }
 
-        private void DecodeColor()
+        private ColorRGB DecodeColor(int rgb) => new ColorRGB
         {
-            Bulb.Color = new ButtonRGB
-            {
-                Blue = Bulb.RGB & 0x000000FF,
-                Green = (Bulb.RGB & 0x0000FF00) >> 8,
-                Red = (Bulb.RGB & 0x00FF0000) >> 16
-            };
-        }
+            Blue = rgb & 0x0000FF,
+            Green = (rgb & 0x00FF00) >> 8,
+            Red = (rgb & 0xFF0000) >> 16
+        };
 
         protected override async Task OnInitializedAsync()
         {

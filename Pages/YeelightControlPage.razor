@@ -46,6 +46,6 @@
 
     @if (Bulb.Color is not null)
     {
-        <YeelightColorMatrix RefreshEvent="GetBulbStatus" Color="Bulb.Color" @ref="colorMatrix" />
+        <ColorPicker RefreshEvent="GetBulbStatus" Color="Bulb.Color" @ref="colorMatrix" />
     }
 }

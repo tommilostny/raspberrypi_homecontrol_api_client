@@ -15,18 +15,11 @@ namespace raspberrypi_homecontrol_api_client.Models
         public int RGB { get; set; }
 
         [JsonIgnore]
-        public ButtonRGB Color { get; set; }
+        public ColorRGB Color { get; set; }
 
         public int Hue { get; set; }
 
         [JsonProperty("sat")]
         public int Saturation { get; set; }
-    }
-
-    public class ButtonRGB
-    {
-        public int Red { get; set; }
-        public int Green { get; set; }
-        public int Blue { get; set; }
     }
 }
