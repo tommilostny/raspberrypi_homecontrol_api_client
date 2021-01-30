@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace raspberrypi_homecontrol_api_client.Components
 {
-    public partial class YeelightColorMatrix
+    public partial class YeelightColorMatrix : ComponentBase
     {
         [Inject]
         private HttpClient httpClient { get; set; }

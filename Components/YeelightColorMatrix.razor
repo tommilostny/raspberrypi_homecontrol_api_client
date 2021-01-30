@@ -12,7 +12,7 @@
 <p><b>Selected color</b>: @SelectedColor</p>
 
 <div class="row">
-    @foreach (var item in AllButtonsRGB)
+    @foreach (var item in AllButtonsRGB.OrderBy(x => x.Red + x.Green + x.Blue).Reverse())
     {
         <div class="col">
             <button class="colorButt" style=@SetButtonColor(item) @onclick="() => YeelightColor(item)"></button>

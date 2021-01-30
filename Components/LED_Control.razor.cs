@@ -6,7 +6,7 @@ using raspberrypi_homecontrol_api_client.Models;
 
 namespace raspberrypi_homecontrol_api_client.Components
 {
-    public partial class LED_Control
+    public partial class LED_Control : ComponentBase
     {
         [Inject]
         private HttpClient httpClient { get; set; }
