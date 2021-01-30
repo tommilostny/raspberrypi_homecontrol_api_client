@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Collections.Generic;
+using raspberrypi_homecontrol_api_client.Models;
 
 namespace raspberrypi_homecontrol_api_client.Components
 {
@@ -10,23 +11,20 @@ namespace raspberrypi_homecontrol_api_client.Components
         [Inject]
         private HttpClient httpClient { get; set; }
 
-        private struct ButtonRGB
-        {
-            public int Red { get; set; }
-            public int Green { get; set; }
-            public int Blue { get; set; }
-        }
+        [Parameter]
+        public EventCallback RefreshEvent { get; set; }
+
+        [Parameter]
+        public ButtonRGB Color { get; set; }
         
         private List<ButtonRGB> AllButtonsRGB { get; set; } = new List<ButtonRGB>();
-
-        private string SelectedColor { get; set; } = string.Empty;
 
         private string SetButtonColor(ButtonRGB color) => $"background-color: rgb({color.Red},{color.Green},{color.Blue});"; 
 
         private async Task YeelightColor(ButtonRGB color)
         {
             await httpClient.GetAsync($"yeelight/color/{color.Red}/{color.Green}/{color.Blue}");
-            SelectedColor = $"rgb({color.Red}, {color.Green}, {color.Blue})";
+            await RefreshEvent.InvokeAsync();
         }
 
         protected override Task OnInitializedAsync()

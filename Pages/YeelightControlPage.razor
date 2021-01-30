@@ -26,5 +26,8 @@
         </div>
     </div>
 
-    <YeelightColorMatrix />
+    @if (Bulb.Color is not null)
+    {
+        <YeelightColorMatrix RefreshEvent="GetBulbStatus" Color="Bulb.Color" @ref="colorMatrix" />
+    }
 }

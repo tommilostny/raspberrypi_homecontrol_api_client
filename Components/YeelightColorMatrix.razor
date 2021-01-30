@@ -9,7 +9,7 @@
     }
 </style>
 
-<p><b>Selected color</b>: @SelectedColor</p>
+<p><b>Selected color</b>: rgb(@Color.Red, @Color.Green, @Color.Blue)</p>
 
 <div class="row">
     @foreach (var item in AllButtonsRGB.OrderBy(x => x.Red + x.Green + x.Blue).Reverse())
