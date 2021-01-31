@@ -49,7 +49,7 @@ namespace raspberrypi_homecontrol_api_client.Pages
 
         private async Task GetBulbStatus()
         {
-            var response = await httpClient.GetAsync($"yeelight");
+            var response = await httpClient.GetAsync("yeelight");
             var content = await response.Content.ReadAsStringAsync();
             Bulb = JsonConvert.DeserializeObject<YeelightBulbModel>(content);
             Bulb.Color = DecodeColor(Bulb.RGB);

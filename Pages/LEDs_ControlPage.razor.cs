@@ -19,7 +19,7 @@ namespace raspberrypi_homecontrol_api_client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            var response = await httpClient.GetAsync($"led");
+            var response = await httpClient.GetAsync("led");
             var content = await response.Content.ReadAsStringAsync();
             Leds = JsonConvert.DeserializeObject<List<LED_Model>>(content);
             
