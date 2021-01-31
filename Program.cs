@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace raspberrypi_homecontrol_api_client
+namespace RaspberryPiHomeControlApiClient
 {
     public class Program
     {

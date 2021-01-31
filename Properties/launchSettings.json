@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "raspberrypi_homecontrol_api_client": {
+    "RaspberryPiHomeControlApiClient": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

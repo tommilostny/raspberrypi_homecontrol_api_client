@@ -3,10 +3,10 @@ using System;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
-using raspberrypi_homecontrol_api_client.Models;
-using raspberrypi_homecontrol_api_client.Components;
+using RaspberryPiHomeControlApiClient.Models;
+using RaspberryPiHomeControlApiClient.Components;
 
-namespace raspberrypi_homecontrol_api_client.Pages
+namespace RaspberryPiHomeControlApiClient.Pages
 {
     public partial class YeelightControlPage
     {

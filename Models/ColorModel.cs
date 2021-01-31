@@ -1,4 +1,4 @@
-namespace raspberrypi_homecontrol_api_client.Models
+namespace RaspberryPiHomeControlApiClient.Models
 {
     public class ColorModel
     {

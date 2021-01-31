@@ -2,9 +2,9 @@ using System;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using System.Net.Http;
-using raspberrypi_homecontrol_api_client.Models;
+using RaspberryPiHomeControlApiClient.Models;
 
-namespace raspberrypi_homecontrol_api_client.Components
+namespace RaspberryPiHomeControlApiClient.Components
 {
     public partial class LED_Control : ComponentBase
     {

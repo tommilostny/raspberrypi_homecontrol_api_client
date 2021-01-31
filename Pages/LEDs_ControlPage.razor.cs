@@ -6,9 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Linq;
 using Newtonsoft.Json;
-using raspberrypi_homecontrol_api_client.Models;
+using RaspberryPiHomeControlApiClient.Models;
 
-namespace raspberrypi_homecontrol_api_client.Pages
+namespace RaspberryPiHomeControlApiClient.Pages
 {
     public partial class LEDs_ControlPage
     {
