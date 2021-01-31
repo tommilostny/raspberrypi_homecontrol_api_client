@@ -1,4 +1,4 @@
-## Raspberry Pi Home control API
+# Raspberry Pi Home control API Client
 
 Local smart home control hub created using **.NET 5 Blazor**.
 
