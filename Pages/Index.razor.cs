@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
@@ -7,19 +6,23 @@ using RaspberryPiHomeControlApiClient.Models;
 
 namespace RaspberryPiHomeControlApiClient.Pages
 {
-    public partial class LEDs_ControlPage
+    public partial class Index
     {
         [Inject]
         private HttpClient httpClient { get; set; }
 
-        private List<LED_Model> Leds { get; set; }
+        private TemperatureModel Temperature { get; set; }
+
+        private async Task GetTemperatureAsync()
+        {
+            var response = await httpClient.GetAsync("temperature");
+            var content = await response.Content.ReadAsStringAsync();
+            Temperature = JsonConvert.DeserializeObject<TemperatureModel>(content);
+        }
 
         protected override async Task OnInitializedAsync()
         {
-            var response = await httpClient.GetAsync("led");
-            var content = await response.Content.ReadAsStringAsync();
-            Leds = JsonConvert.DeserializeObject<List<LED_Model>>(content);
-            
+            await GetTemperatureAsync();
             await base.OnInitializedAsync();
         }
     }
