@@ -1,6 +1,6 @@
 @page "/yeelight"
 @using RaspberryPiHomeControlApiClient.Components
-@using RaspberryPiHomeControlApiClient.Components.Yeelight
+@using RaspberryPiHomeControlApiClient.Models
 
 <style>
     input[type=range] {
@@ -63,7 +63,7 @@
 
     @if (Bulb.Color is not null)
     {
-        <ColorPicker RefreshEvent="GetBulbStatus" Color="Bulb.Color" />
+        <ColorPicker RefreshEvent="GetBulbStatus" Color="Bulb.Color" Mode="ColorMode.Yeelight" />
     }
 }
 

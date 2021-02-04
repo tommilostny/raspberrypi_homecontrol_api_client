@@ -14,12 +14,16 @@ namespace RaspberryPiHomeControlApiClient.Pages
 
         private List<LED_Model> Leds { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        private async Task GetLedsStatus()
         {
             var response = await httpClient.GetAsync("led");
             var content = await response.Content.ReadAsStringAsync();
             Leds = JsonConvert.DeserializeObject<List<LED_Model>>(content);
-            
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await GetLedsStatus();
             await base.OnInitializedAsync();
         }
     }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using RaspberryPiHomeControlApiClient.Models;
 
-namespace RaspberryPiHomeControlApiClient.Components.Yeelight
+namespace RaspberryPiHomeControlApiClient.Components
 {
     public partial class ColorPicker : ComponentBase
     {
@@ -17,6 +17,12 @@ namespace RaspberryPiHomeControlApiClient.Components.Yeelight
 
         [Parameter]
         public ColorRGB Color { get; set; }
+
+        [Parameter]
+        public ColorMode Mode { get; set; }
+
+        [Parameter]
+        public bool ShowLabels { get; set; } = true;
         
         private List<ColorModel> Colors { get; set; }
 
@@ -25,9 +31,17 @@ namespace RaspberryPiHomeControlApiClient.Components.Yeelight
 
         private string SetButtonColor(ColorRGB color) => $"background-color: rgb({color.Red},{color.Green},{color.Blue});"; 
 
-        private async Task YeelightColor(ColorRGB color)
+        private async Task SendColor(ColorRGB color)
         {
-            await httpClient.GetAsync($"yeelight/color/{color.Red}/{color.Green}/{color.Blue}");
+            switch (Mode)
+            {
+                case ColorMode.Yeelight:
+                    await httpClient.GetAsync($"yeelight/color/{color.Red}/{color.Green}/{color.Blue}");
+                    break;
+                case ColorMode.LED:
+                    await httpClient.GetAsync($"led/rgb/{color.Red}/{color.Green}/{color.Blue}");
+                    break;
+            }
             await RefreshEvent.InvokeAsync();
         }
 
@@ -44,5 +58,7 @@ namespace RaspberryPiHomeControlApiClient.Components.Yeelight
 
             await base.OnInitializedAsync();
         }
+
+        private string GetButtonDimension() => Mode == ColorMode.Yeelight ? "64px;" : "32px;";
     }
 }

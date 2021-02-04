@@ -14,7 +14,12 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
         [Parameter]
         public LED_Model Led { get; set; }
 
+        [Parameter]
+        public EventCallback RefreshLEDs { get; set; }
+
         private double Interval { get; set; } = 1.0;
+
+        private ColorRGB MappedColor { get; set; }
 
         private async Task LED_Toggle()
         {
@@ -39,5 +44,19 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
         private string LedStatusAsString() => Led.IsActive ? "on" : "off";
 
         private string LedStatusImage() => $"led{Led.Number}{LedStatusAsString()}.jpg";
+
+        protected override async Task OnInitializedAsync()
+        {
+            if (Led.IsRGB)
+            {
+                MappedColor = new ColorRGB
+                {
+                    Red = (int)(Led.Color[0] * 255.0),
+                    Green = (int)(Led.Color[1] * 255.0),
+                    Blue = (int)(Led.Color[2] * 255.0),
+                };
+            }
+            await base.OnInitializedAsync();
+        }
     }
 }

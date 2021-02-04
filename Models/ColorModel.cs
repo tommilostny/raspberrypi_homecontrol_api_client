@@ -13,4 +13,9 @@ namespace RaspberryPiHomeControlApiClient.Models
         public int Green { get; set; }
         public int Blue { get; set; }
     }
+
+    public enum ColorMode
+    {
+        Yeelight, LED
+    }
 }
