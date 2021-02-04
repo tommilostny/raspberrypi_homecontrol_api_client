@@ -1,0 +1,35 @@
+<style>
+    .card {
+        padding: 20px;
+        margin: 5px;
+        box-shadow: 0 0 15px lightgrey;
+        border-radius: 10px
+    }
+    .inside {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="card">
+    @if (Temperature is not null)
+    {
+        <h3>Room temperature</h3>
+        <div class="row inside">
+            <div class="col">
+                <h4><b>@Temperature.Celsius°C</b></h4>
+            </div>
+            <div class="col">
+                <h4>@Temperature.Fahrenheit°F</h4>
+            </div>
+            <div class="col">
+                <h4>@Temperature.Kelvin°K</h4>
+            </div>
+        </div>
+        <button class="btn btn-secondary" @onclick="GetTemperatureAsync">Refresh</button>
+    }
+    else
+    {
+        <p>Loading room temperature...</p>
+    }
+</div>

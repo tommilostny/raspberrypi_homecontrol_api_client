@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
+using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 using RaspberryPiHomeControlApiClient.Models;
@@ -15,44 +16,107 @@ namespace RaspberryPiHomeControlApiClient.Pages
 
         private YeelightBulbModel Bulb { get; set; }
 
-        private ColorPicker colorMatrix { get; set; }
+        private ErrorDialog BadResponseDialog { get; set; }
+
 
         private async Task YeelightToggle()
         {
-            await httpClient.GetAsync("yeelight/power/toggle");
-            await GetBulbStatus();
+            try
+            {
+                await httpClient.GetAsync("yeelight/power/toggle");
+                await GetBulbStatus();
+            }
+            catch (Exception exception)
+            { 
+                BadResponseDialog.Show(exception.Message);
+            }
         }
 
         private async Task YeelightBrightness(ChangeEventArgs e)
         {
-            Bulb.Brightness = Convert.ToInt32(e.Value);
-            await httpClient.GetAsync($"yeelight/brightness/{Bulb.Brightness}");
+            try
+            {
+                var brightness = Convert.ToInt32(e.Value);
+                var response = await httpClient.GetAsync($"yeelight/brightness/{brightness}");
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    await BadResponseDialog.Show(response);
+                }
+                else Bulb.Brightness = brightness;
+            }
+            catch (Exception exception)
+            { 
+                BadResponseDialog.Show(exception.Message);
+            }
         }
 
         private async Task YeelightTemperature(ChangeEventArgs e)
         {
-            Bulb.Temperature = Convert.ToInt32(e.Value);
-            await httpClient.GetAsync($"yeelight/temperature/{Bulb.Temperature}");
+            try
+            {
+                var temperature = Convert.ToInt32(e.Value);
+                var response = await httpClient.GetAsync($"yeelight/temperature/{temperature}");
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    await BadResponseDialog.Show(response);
+                }
+                else Bulb.Temperature = temperature;
+            }
+            catch (Exception exception)
+            { 
+                BadResponseDialog.Show(exception.Message);
+            }
         }
 
         private async Task YeelightHue(ChangeEventArgs e)
         {
-            Bulb.Hue = Convert.ToInt32(e.Value);
-            await httpClient.GetAsync($"yeelight/hs/{Bulb.Hue}/{Bulb.Saturation}");
+            try
+            {
+                var hue = Convert.ToInt32(e.Value);
+                var response = await httpClient.GetAsync($"yeelight/hs/{hue}/{Bulb.Saturation}");
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    await BadResponseDialog.Show(response);
+                }
+                else Bulb.Hue = hue;
+            }
+            catch (Exception exception)
+            { 
+                BadResponseDialog.Show(exception.Message);
+            }
         }
 
         private async Task YeelightSaturation(ChangeEventArgs e)
         {
-            Bulb.Saturation = Convert.ToInt32(e.Value);
-            await httpClient.GetAsync($"yeelight/hs/{Bulb.Hue}/{Bulb.Saturation}");
+            try
+            {
+                var saturation = Convert.ToInt32(e.Value);
+                var response = await httpClient.GetAsync($"yeelight/hs/{Bulb.Hue}/{saturation}");
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    await BadResponseDialog.Show(response);
+                }
+                else Bulb.Saturation = saturation;
+            }
+            catch (Exception exception)
+            { 
+                BadResponseDialog.Show(exception.Message);
+            }
         }
 
         private async Task GetBulbStatus()
         {
-            var response = await httpClient.GetAsync("yeelight");
-            var content = await response.Content.ReadAsStringAsync();
-            Bulb = JsonConvert.DeserializeObject<YeelightBulbModel>(content);
-            Bulb.Color = DecodeColor(Bulb.RGB);
+            try
+            {
+                var response = await httpClient.GetAsync("yeelight");
+                var content = await response.Content.ReadAsStringAsync();
+                Bulb = JsonConvert.DeserializeObject<YeelightBulbModel>(content);
+                Bulb.Color = DecodeColor(Bulb.RGB);
+            }
+            catch (Exception exception)
+            { 
+                BadResponseDialog.Show(exception.Message);
+            }
         }
 
         private ColorRGB DecodeColor(int rgb) => new ColorRGB

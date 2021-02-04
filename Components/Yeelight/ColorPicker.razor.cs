@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using RaspberryPiHomeControlApiClient.Models;
 
-namespace RaspberryPiHomeControlApiClient.Components
+namespace RaspberryPiHomeControlApiClient.Components.Yeelight
 {
     public partial class ColorPicker : ComponentBase
     {

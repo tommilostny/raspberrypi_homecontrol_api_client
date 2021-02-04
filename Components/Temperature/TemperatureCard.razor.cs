@@ -1,12 +1,12 @@
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using System.Net.Http;
-using Newtonsoft.Json;
 using RaspberryPiHomeControlApiClient.Models;
 
-namespace RaspberryPiHomeControlApiClient.Pages
+namespace RaspberryPiHomeControlApiClient.Components.Temperature
 {
-    public partial class Index
+    public partial class TemperatureCard : ComponentBase
     {
         [Inject]
         private HttpClient httpClient { get; set; }

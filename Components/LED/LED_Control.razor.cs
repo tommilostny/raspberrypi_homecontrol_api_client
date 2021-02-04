@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using RaspberryPiHomeControlApiClient.Models;
 
-namespace RaspberryPiHomeControlApiClient.Components
+namespace RaspberryPiHomeControlApiClient.Components.LED
 {
     public partial class LED_Control : ComponentBase
     {
