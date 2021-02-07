@@ -24,14 +24,15 @@ namespace RaspberryPiHomeControlApiClient.Components.Temperature
 
         private async Task ClearLog()
         {
-            
-            var response = await httpClient.GetAsync("temp_log/clear");
+            var response = await httpClient.DeleteAsync("temp_log");
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 LogLines = new List<string>();
             }
             //else ErrorDialog?
         }
+
+        private int GetLinesCount() => LogLines is not null ? LogLines.Count : 0;
 
         protected override async Task OnInitializedAsync()
         {

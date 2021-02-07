@@ -12,5 +12,9 @@ namespace RaspberryPiHomeControlApiClient.Models
 
         [JsonProperty("tempK")]
         public float Kelvin { get; set; }
+
+        public float ThresholdDay { get; set; }
+
+        public float ThresholdNight { get; set; }
     }
 }

@@ -13,16 +13,26 @@ namespace RaspberryPiHomeControlApiClient.Components.Temperature
 
         private TemperatureModel Temperature { get; set; }
 
-        private async Task GetTemperatureAsync()
+        private async Task GetTemperature()
         {
             var response = await httpClient.GetAsync("temperature");
             var content = await response.Content.ReadAsStringAsync();
             Temperature = JsonConvert.DeserializeObject<TemperatureModel>(content);
         }
 
+        private async Task SetTempThreshold(string period)
+        {
+            float newThreshold = period switch
+            {
+                "day" => Temperature.ThresholdDay,
+                _ => Temperature.ThresholdNight
+            };
+            await httpClient.GetAsync($"temp_threshold/{period}/{string.Format("{0:N3}", newThreshold)}");
+        }
+
         protected override async Task OnInitializedAsync()
         {
-            await GetTemperatureAsync();
+            await GetTemperature();
             await base.OnInitializedAsync();
         }
     }

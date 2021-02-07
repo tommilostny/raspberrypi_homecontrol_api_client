@@ -26,10 +26,43 @@
                 <h4>@Temperature.Kelvin°K</h4>
             </div>
         </div>
-        <button class="btn btn-secondary" @onclick="GetTemperatureAsync">Refresh</button>
+
+        <button class="btn btn-secondary" @onclick="GetTemperature">Refresh</button>
+
+        <hr>
+        <label for="thresholdday_text">Temperature threshold (day):</label>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="number" id="thresholdday_text" @bind-value="@Temperature.ThresholdDay" />
+                    <span class="input-group-text">°C</span>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-warning" @onclick="() => SetTempThreshold(dayString)">Set</button>
+            </div>
+        </div>
+
+        <label for="thresholdnight_text">Temperature threshold (night):</label>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="number" id="thresholdnighz_text" @bind-value="@Temperature.ThresholdNight" />
+                    <span class="input-group-text">°C</span>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-warning" @onclick="() => SetTempThreshold(nightString)">Set</button>
+            </div>
+        </div>
     }
     else
     {
         <p>Loading room temperature...</p>
     }
 </div>
+
+@code {
+    const string nightString = "night";
+    const string dayString = "day";
+}
