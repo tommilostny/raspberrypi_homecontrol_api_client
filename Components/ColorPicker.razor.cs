@@ -43,6 +43,7 @@ namespace RaspberryPiHomeControlApiClient.Components
                     break;
             }
             await RefreshEvent.InvokeAsync();
+            Color = color;
         }
 
         protected override async Task OnInitializedAsync()

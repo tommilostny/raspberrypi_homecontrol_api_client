@@ -14,9 +14,6 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
         [Parameter]
         public LED_Model Led { get; set; }
 
-        [Parameter]
-        public EventCallback RefreshLEDs { get; set; }
-
         private double Interval { get; set; } = 1.0;
 
         private ColorRGB MappedColor { get; set; }

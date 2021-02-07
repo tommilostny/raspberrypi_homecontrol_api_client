@@ -1,14 +1,15 @@
 ﻿@page "/led"
 @using RaspberryPiHomeControlApiClient.Components.LED
 
+<h1>LED control</h1>
+
 @if (Leds is not null)
 {
-    <h1>LED control</h1>
     <div class="row">
         @foreach (var led in Leds)
         {
             <div class="col-md-6">
-                <LED_Control Led="@led" RefreshLEDs="GetLedsStatus" />
+                <LED_Control Led="@led" />
             </div>
         }
     </div>

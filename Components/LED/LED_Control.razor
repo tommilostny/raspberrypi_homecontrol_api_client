@@ -27,7 +27,7 @@
             }
             else if (MappedColor is not null)
             {
-                <ColorPicker RefreshEvent="RefreshLEDs" Color="MappedColor" Mode="ColorMode.LED" ShowLabels="false" />
+                <ColorPicker RefreshEvent="() => Led.IsActive = true" Color="MappedColor" Mode="ColorMode.LED" ShowLabels="false" />
             }
         </div>
         @if (!Led.IsRGB)
