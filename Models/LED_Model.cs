@@ -13,5 +13,7 @@ namespace RaspberryPiHomeControlApiClient.Models
         public bool IsRGB { get; set; }
 
         public List<float> Color { get; set; }
+
+        public string Name { get; set; }
     }
 }

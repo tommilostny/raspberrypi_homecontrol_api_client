@@ -16,7 +16,7 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
 
         private double Interval { get; set; } = 1.0;
 
-        private ColorRGB MappedColor { get; set; }
+        private ColorRGB MappedColor { get; set; } = null;
 
         private async Task LED_Toggle()
         {
