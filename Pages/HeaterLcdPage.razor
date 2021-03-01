@@ -12,9 +12,9 @@
     }
 </style>
 
-<h1>LCD display 16x2</h1>
+<h1>LCD display @(_lineWidth)x@(_linesCount)</h1>
 
-<LCD_Control />
+<LCD_Control LineWidth="@_lineWidth" LinesCount="@_linesCount" />
 
 <br><br>
 
@@ -26,3 +26,9 @@
         <TemperatureCard />
     </div>
 </div>
+
+@code
+{
+    private const int _lineWidth = 16;
+    private const int _linesCount = 2;
+}
