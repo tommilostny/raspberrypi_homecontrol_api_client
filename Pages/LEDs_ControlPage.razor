@@ -1,7 +1,18 @@
 ﻿@page "/led"
 @using RaspberryPiHomeControlApiClient.Components.LED
 
-<h1>LED control</h1>
+<style>
+    .btn-margs {
+        margin: 15px;
+        margin-left: 20px;
+        margin-right: 0;
+    }
+</style>
+
+<h1>LED control
+    <button class="btn btn-secondary btn-margs" @onclick="ToggleAllLeds" disabled=@(Leds is null)>Toggle All</button>
+    <button class="btn btn-secondary btn-margs" @onclick="BlinkAllLeds" disabled=@(Leds is null)>Blink All</button>
+</h1>
 
 @if (Leds is not null)
 {
@@ -13,4 +24,8 @@
             </div>
         }
     </div>
+}
+else
+{
+    <p>Loading...</p>
 }

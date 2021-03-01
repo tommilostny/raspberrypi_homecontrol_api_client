@@ -66,5 +66,9 @@
         <ColorPicker RefreshEvent="GetBulbStatus" Color="Bulb.Color" Mode="ColorMode.Yeelight" />
     }
 }
+else
+{
+    <p>Loading...</p>
+}
 
 <ErrorDialog @ref="BadResponseDialog" />

@@ -14,28 +14,16 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
         [Parameter]
         public LED_Model Led { get; set; }
 
-        private double Interval { get; set; } = 1.0;
-
         private ColorRGB MappedColor { get; set; } = null;
 
-        private async Task LED_Toggle()
-        {
-            if (Led.IsActive = !Led.IsActive)
-                await httpClient.GetAsync($"led/{Led.Number}/on");
-            else
-                await httpClient.GetAsync($"led/{Led.Number}/off");
-        }
+        private async Task LED_Toggle() => await Led.Toggle(httpClient);
 
-        private async Task LED_Blink()
-        {
-            await httpClient.GetAsync($"led/{Led.Number}/blink/{string.Format("{0:N2}", Interval)}");
-            Led.IsActive = true;
-        }
+        private async Task LED_Blink() => await Led.Blink(httpClient);
 
         private void IntervalInput_ChangeEvent(ChangeEventArgs e)
         {
             var inputValue = Convert.ToDouble(e.Value);
-            Interval = inputValue > 0 ? inputValue : 1.0;
+            Led.BlinkInterval = inputValue > 0 ? inputValue : 1.0;
         }
 
         private string LedStatusAsString() => Led.IsActive ? "on" : "off";
