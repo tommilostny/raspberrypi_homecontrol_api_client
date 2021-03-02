@@ -8,7 +8,9 @@
     }
 </style>
 
-<h1>Yeelight control</h1>
+<Title Value="@title" />
+<h1>@title</h1>
+
 @if (Bulb is not null)
 {
     <div class="row">
@@ -72,3 +74,7 @@ else
 }
 
 <ErrorDialog @ref="BadResponseDialog" />
+
+@code {
+    string title = "Yeelight control";
+}

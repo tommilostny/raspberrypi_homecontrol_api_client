@@ -12,7 +12,8 @@
     }
 </style>
 
-<h1>LCD display @(_lineWidth)x@(_linesCount)</h1>
+<Title Value="@title" />
+<h1>@title</h1>
 
 <LCD_Control LineWidth="@_lineWidth" LinesCount="@_linesCount" />
 
@@ -31,4 +32,6 @@
 {
     private const int _lineWidth = 16;
     private const int _linesCount = 2;
+
+    string title = $"LCD display {_lineWidth}x{_linesCount}";
 }
