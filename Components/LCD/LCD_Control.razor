@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-7">
         <input @oninput="MessageInput" type="text" />
-        <p>Message length: @Message.Length/@(LineWidth * LinesCount)</p>
+        <p>Message length: @Message.Length/@LcdCapacity</p>
         <button class="btn btn-primary" @onclick="SendMessageToLcd" type="submit">Send</button>
     </div>
     <div class="col">

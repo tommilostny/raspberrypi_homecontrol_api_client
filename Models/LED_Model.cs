@@ -20,12 +20,12 @@ namespace RaspberryPiHomeControlApiClient.Models
         public string Name { get; set; }
 
         [JsonIgnore]
-        public double BlinkInterval { get; set; } = 1.0;
+        public float BlinkInterval { get; set; } = 1F;
 
-        public async Task Toggle(HttpClient httpClient)
+        public async Task ToggleAsync(HttpClient httpClient)
             => await httpClient.GetAsync($"led/{Number}/{((IsActive = !IsActive) ? "on" : "off")}");
 
-        public async Task Blink(HttpClient httpClient)
+        public async Task BlinkAsync(HttpClient httpClient)
         {
             await httpClient.GetAsync($"led/{Number}/blink/{string.Format("{0:N2}", BlinkInterval)}");
             IsActive = true;

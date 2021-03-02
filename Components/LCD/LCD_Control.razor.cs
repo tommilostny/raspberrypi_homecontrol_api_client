@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using System.Net.Http;
-using System.Linq;
 
 namespace RaspberryPiHomeControlApiClient.Components.LCD
 {
@@ -18,6 +17,8 @@ namespace RaspberryPiHomeControlApiClient.Components.LCD
         [Parameter]
         public int LinesCount { get; set; } = 2;
 
+        private int LcdCapacity { get => LineWidth * LinesCount; }
+
         private async Task SendMessageToLcd()
         {
             var lines = new string[LinesCount];
@@ -29,15 +30,16 @@ namespace RaspberryPiHomeControlApiClient.Components.LCD
                     int index = i + line * LineWidth;
                     lines[line] += index < Message.Length ? Message[index] : ' ';
                 }
-                if (lines[line] != string.Empty)
-                    await httpClient.GetAsync($"lcd_message/{lines[line]}/{line + 1}");
+                await httpClient.GetAsync($"lcd_message/{lines[line]}/{line + 1}");
             }
         }
 
-        private async Task LcdBacklightToggle()
-            => await httpClient.GetAsync("heater_lcd/2");
+        private async Task LcdBacklightToggle() => await httpClient.GetAsync("heater_lcd/2");
 
         private void MessageInput(ChangeEventArgs e)
-            => Message = e.Value.ToString().Length <= 32 ? e.Value.ToString() : e.Value.ToString().Substring(0, 32);
+        {
+            var input = e.Value.ToString();
+            Message = input.Length <= LcdCapacity ? input : input.Substring(0, LcdCapacity);
+        }
     }
 }

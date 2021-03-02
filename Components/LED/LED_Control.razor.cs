@@ -16,14 +16,14 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
 
         private ColorRGB MappedColor { get; set; } = null;
 
-        private async Task LED_Toggle() => await Led.Toggle(httpClient);
+        private async Task LED_Toggle() => await Led.ToggleAsync(httpClient);
 
-        private async Task LED_Blink() => await Led.Blink(httpClient);
+        private async Task LED_Blink() => await Led.BlinkAsync(httpClient);
 
         private void IntervalInput_ChangeEvent(ChangeEventArgs e)
         {
-            var inputValue = Convert.ToDouble(e.Value);
-            Led.BlinkInterval = inputValue > 0 ? inputValue : 1.0;
+            var inputValue = Convert.ToSingle(e.Value);
+            Led.BlinkInterval = inputValue > 0F ? inputValue : 1F;
         }
 
         private string LedStatusAsString() => Led.IsActive ? "on" : "off";
@@ -36,9 +36,9 @@ namespace RaspberryPiHomeControlApiClient.Components.LED
             {
                 MappedColor = new ColorRGB
                 {
-                    Red = (int)(Led.Color[0] * 255.0),
-                    Green = (int)(Led.Color[1] * 255.0),
-                    Blue = (int)(Led.Color[2] * 255.0),
+                    Red = (int)(Led.Color[0] * 255F),
+                    Green = (int)(Led.Color[1] * 255F),
+                    Blue = (int)(Led.Color[2] * 255F),
                 };
             }
             await base.OnInitializedAsync();
