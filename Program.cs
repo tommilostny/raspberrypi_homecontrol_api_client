@@ -17,7 +17,7 @@ namespace RaspberryPiHomeControlApiClient
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://raspberrypi.local:5000/") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://192.168.1.224:5000/") });
 
             await builder.Build().RunAsync();
         }
