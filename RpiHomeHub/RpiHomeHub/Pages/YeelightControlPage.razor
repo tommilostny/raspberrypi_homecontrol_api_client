@@ -1,6 +1,7 @@
 ﻿@page "/yeelight"
-@using RpiHomeHub.Components
-@using RpiHomeHub.Models
+@using RpiHomeHub.Components;
+@using RpiHomeHub.Models;
+@using RpiHomeHub.Components.Bulb;
 
 <style>
     input[type=range] {
@@ -13,12 +14,7 @@
 
 @if (Bulb is not null)
 {
-    <div class="row">
-        <div class="col">
-            <p>Power: <b>@Bulb.Power</b></p>
-            <button class="btn btn-primary" @onclick="YeelightToggle">Toggle</button>
-        </div>
-    </div>
+    <BulbPowerControls Bulb=@Bulb />
     <br>
     <div class="row">
         <div class="col">
@@ -65,7 +61,7 @@
 
     @if (Bulb.Color is not null)
     {
-        <ColorPicker RefreshEvent="GetBulbStatus" Color="Bulb.Color" Mode="ColorMode.Yeelight" />
+        <ColorPicker RefreshEvent="yeelightService.GetStatus" Color="Bulb.Color" Mode="ColorMode.Yeelight" />
     }
 }
 else
@@ -73,7 +69,7 @@ else
     <p>Loading...</p>
 }
 
-<ErrorDialog @ref="BadResponseDialog" />
+<!--<ErrorDialog @ref="BadResponseDialog" />-->
 
 @code {
     string title = "Yeelight control";

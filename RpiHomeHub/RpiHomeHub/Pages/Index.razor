@@ -1,11 +1,21 @@
 ﻿@page "/"
+@using RpiHomeHub.Components.Temperature;
+@using RpiHomeHub.Components.Bulb;
 
 <!--<Title Value="@title" />-->
 <h1>@title</h1>
-<p>
-    @("<-- Continue to pages here.")
-</p>
+
+<br />
+
+<div class="row inside">
+    <div class="col-md">
+        <TemperatureCard ShowThresholdSetting="false" />
+    </div>
+    <div class="col-md">
+        <BulbPowerControls />
+    </div>
+</div>
 
 @code {
-    string title = "Welcome to Raspberry Pi Home Control Hub!";
+    string title = "Raspberry Pi Home Control Hub";
 }

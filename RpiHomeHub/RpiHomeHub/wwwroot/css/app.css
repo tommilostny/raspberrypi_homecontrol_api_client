@@ -1,4 +1,19 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿.card {
+    padding: 20px;
+    margin: 5px;
+    box-shadow: 0 0 15px lightgrey;
+    border-radius: 10px
+}
+
+.inside {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+/* Blazor generated */
+
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

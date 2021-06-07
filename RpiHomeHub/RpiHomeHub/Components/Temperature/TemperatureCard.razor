@@ -1,18 +1,4 @@
-﻿<style>
-	.card {
-		padding: 20px;
-		margin: 5px;
-		box-shadow: 0 0 15px lightgrey;
-		border-radius: 10px
-	}
-
-	.inside {
-		margin-top: 15px;
-		margin-bottom: 15px;
-	}
-</style>
-
-<div class="card">
+﻿<div class="card">
 	@if (Temperature is not null)
 	{
 	 <h3>Room temperature</h3>
@@ -30,32 +16,35 @@
 
 	 <button class="btn btn-secondary" @onclick="GetTemperature">Refresh</button>
 
-	 <hr>
-	 <label for="thresholdday_text">Temperature threshold (day):</label>
-	 <div class="row">
-	  <div class="col">
-	   <div class="input-group mb-3">
-		<input type="number" id="thresholdday_text" @bind-value="@Temperature.ThresholdDay" />
-		<span class="input-group-text">°C</span>
-	   </div>
-	  </div>
-	  <div class="col-3">
-	   <button class="btn btn-warning" @onclick="() => SetTempThreshold(dayString)">Set</button>
-	  </div>
-	 </div>
+	 @if (ShowThresholdSetting)
+	 {
+		 <hr>
+		 <label for="thresholdday_text">Temperature threshold (day):</label>
+		 <div class="row">
+		  <div class="col">
+		   <div class="input-group mb-3">
+			<input type="number" id="thresholdday_text" @bind-value="@Temperature.ThresholdDay" />
+			<span class="input-group-text">°C</span>
+		   </div>
+		  </div>
+		  <div class="col-3">
+		   <button class="btn btn-warning" @onclick="() => SetTempThreshold(dayString)">Set</button>
+		  </div>
+		 </div>
 
-	 <label for="thresholdnight_text">Temperature threshold (night):</label>
-	 <div class="row">
-	  <div class="col">
-	   <div class="input-group mb-3">
-		<input type="number" id="thresholdnighz_text" @bind-value="@Temperature.ThresholdNight" />
-		<span class="input-group-text">°C</span>
-	   </div>
-	  </div>
-	  <div class="col-3">
-	   <button class="btn btn-warning" @onclick="() => SetTempThreshold(nightString)">Set</button>
-	  </div>
-	 </div>
+		 <label for="thresholdnight_text">Temperature threshold (night):</label>
+		 <div class="row">
+		  <div class="col">
+		   <div class="input-group mb-3">
+			<input type="number" id="thresholdnighz_text" @bind-value="@Temperature.ThresholdNight" />
+			<span class="input-group-text">°C</span>
+		   </div>
+		  </div>
+		  <div class="col-3">
+		   <button class="btn btn-warning" @onclick="() => SetTempThreshold(nightString)">Set</button>
+		  </div>
+		 </div>
+	 }
 	}
 	else
 	{

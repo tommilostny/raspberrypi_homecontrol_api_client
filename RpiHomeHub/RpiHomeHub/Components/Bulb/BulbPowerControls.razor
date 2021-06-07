@@ -1,0 +1,15 @@
+﻿<div class="card">
+    <div class="row inside">
+        <div class="col">
+    @if (Bulb is not null)
+    {
+            <p>Power: <b>@Bulb.Power</b></p>
+            <button class="btn btn-primary" @onclick="Toggle">Toggle</button>
+    }
+    else
+    {
+            <p>Loading...</p>
+    }
+        </div>
+    </div>
+</div>

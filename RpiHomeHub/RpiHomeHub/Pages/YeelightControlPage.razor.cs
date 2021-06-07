@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json;
-using RpiHomeHub.Components;
 using RpiHomeHub.Models;
+using RpiHomeHub.Services;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -14,21 +13,23 @@ namespace RpiHomeHub.Pages
         [Inject]
         private HttpClient httpClient { get; set; }
 
+        [Inject]
+        private YeelightBulbService yeelightService { get; set; }
+
         private YeelightBulbModel Bulb { get; set; }
 
-        private ErrorDialog BadResponseDialog { get; set; }
+        //private ErrorDialog BadResponseDialog { get; set; }
 
 
         private async Task YeelightToggle()
         {
             try
             {
-                await httpClient.GetAsync("lights/power/toggle");
-                await GetBulbStatus();
+                Bulb = await yeelightService.Toggle();
             }
-            catch (Exception exception)
+            catch
             {
-                BadResponseDialog.Show(exception.Message);
+                //BadResponseDialog.Show(exception.Message);
             }
         }
 
@@ -40,13 +41,13 @@ namespace RpiHomeHub.Pages
                 var response = await httpClient.GetAsync($"lights/brightness/{brightness}");
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    await BadResponseDialog.Show(response);
+                    //await BadResponseDialog.Show(response);
                 }
                 else Bulb.Brightness = brightness;
             }
-            catch (Exception exception)
+            catch
             {
-                BadResponseDialog.Show(exception.Message);
+                //BadResponseDialog.Show(exception.Message);
             }
         }
 
@@ -58,13 +59,13 @@ namespace RpiHomeHub.Pages
                 var response = await httpClient.GetAsync($"lights/temperature/{temperature}");
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    await BadResponseDialog.Show(response);
+                    //await BadResponseDialog.Show(response);
                 }
                 else Bulb.Temperature = temperature;
             }
-            catch (Exception exception)
+            catch
             {
-                BadResponseDialog.Show(exception.Message);
+                //BadResponseDialog.Show(exception.Message);
             }
         }
 
@@ -76,13 +77,13 @@ namespace RpiHomeHub.Pages
                 var response = await httpClient.GetAsync($"lights/hs/{hue}/{Bulb.Saturation}");
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    await BadResponseDialog.Show(response);
+                    //await BadResponseDialog.Show(response);
                 }
                 else Bulb.Hue = hue;
             }
-            catch (Exception exception)
+            catch
             {
-                BadResponseDialog.Show(exception.Message);
+                //BadResponseDialog.Show(exception.Message);
             }
         }
 
@@ -94,41 +95,19 @@ namespace RpiHomeHub.Pages
                 var response = await httpClient.GetAsync($"lights/hs/{Bulb.Hue}/{saturation}");
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    await BadResponseDialog.Show(response);
+                    //await BadResponseDialog.Show(response);
                 }
                 else Bulb.Saturation = saturation;
             }
-            catch (Exception exception)
+            catch
             {
-                BadResponseDialog.Show(exception.Message);
+                //BadResponseDialog.Show(exception.Message);
             }
         }
-
-        private async Task GetBulbStatus()
-        {
-            try
-            {
-                var response = await httpClient.GetAsync("yeelight");
-                var content = await response.Content.ReadAsStringAsync();
-                Bulb = JsonConvert.DeserializeObject<YeelightBulbModel>(content);
-                Bulb.Color = DecodeColor(Bulb.RGB);
-            }
-            catch (Exception exception)
-            {
-                BadResponseDialog.Show(exception.Message);
-            }
-        }
-
-        private ColorRGB DecodeColor(int rgb) => new ColorRGB
-        {
-            Blue = rgb & 0x0000FF,
-            Green = (rgb & 0x00FF00) >> 8,
-            Red = (rgb & 0xFF0000) >> 16
-        };
 
         protected override async Task OnInitializedAsync()
         {
-            await GetBulbStatus();
+            Bulb = await yeelightService.GetStatus();
             await base.OnInitializedAsync();
         }
     }

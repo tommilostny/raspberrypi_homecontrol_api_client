@@ -5,6 +5,7 @@ using Microsoft.Maui.Hosting;
 using Microsoft.Maui.Controls.Compatibility;
 using System.Net.Http;
 using System;
+using RpiHomeHub.Services;
 
 namespace RpiHomeHub
 {
@@ -29,6 +30,7 @@ namespace RpiHomeHub
 						{
 							BaseAddress = new Uri("http://192.168.1.224:5000/")
 						});
+					services.AddSingleton<YeelightBulbService>();
 				});
 		}
 	}

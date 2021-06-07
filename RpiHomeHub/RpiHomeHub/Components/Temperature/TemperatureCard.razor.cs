@@ -13,6 +13,9 @@ namespace RpiHomeHub.Components.Temperature
 
         private TemperatureModel Temperature { get; set; }
 
+        [Parameter]
+        public bool ShowThresholdSetting { get; set; } = true;
+
         private async Task GetTemperature()
         {
             var response = await httpClient.GetAsync("temperature");
