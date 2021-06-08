@@ -10,9 +10,14 @@
     margin-bottom: 15px;
 }
 
+.sidebar-icon
+{
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+}
 
 /* Blazor generated */
-
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
@@ -62,7 +67,8 @@ app {
         }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    /* background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); */
+    background-color: #b71c1c;
 }
 
     .sidebar .top-row {

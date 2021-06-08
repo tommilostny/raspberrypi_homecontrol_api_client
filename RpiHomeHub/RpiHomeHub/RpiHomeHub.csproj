@@ -8,7 +8,7 @@
 		<RootNamespace>RpiHomeHub</RootNamespace>
 
 		<!-- Display name -->
-		<ApplicationTitle>RpiHomeHub</ApplicationTitle>
+		<ApplicationTitle>Raspberry Pi Home Control Hub</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.RpiHomeHub</ApplicationId>
@@ -22,10 +22,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiImage Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" />
+		<MauiImage Include="Resources\icon-512.png" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
+		<MauiSplashScreen Include="Resources\icon-512.png" Color="#B71C1C" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
