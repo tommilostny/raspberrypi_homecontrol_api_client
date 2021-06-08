@@ -19,6 +19,8 @@ namespace RpiHomeHub.Models
 
         public string Name { get; set; }
 
+        public bool Enabled { get; set; }
+
         [JsonIgnore]
         public float BlinkInterval { get; set; } = 1F;
 
